@@ -23,3 +23,21 @@ export interface DbFile {
   icon: string
   created_at: string
 }
+
+export interface ActivityLog {
+  id: string
+  action: string
+  item_type: string
+  item_name: string
+  details: string | null
+  created_at: string
+}
+
+export async function logActivity(action: string, itemType: string, itemName: string, details?: string) {
+  await supabase.from('activity_logs').insert({
+    action,
+    item_type: itemType,
+    item_name: itemName,
+    details: details || null
+  })
+}
