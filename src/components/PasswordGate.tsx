@@ -14,7 +14,7 @@ const PasswordGate = ({ onUnlock }: PasswordGateProps) => {
   const handleSubmit = useCallback(
     (e: React.FormEvent) => {
       e.preventDefault();
-      if (password === "password1234") {
+      if (password === "server1234") {
         onUnlock();
       } else {
         setError(true);
