@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 200 6% 10%;
+    --foreground: 0 0% 95%;
+
+    --card: 200 6% 14%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 200 6% 14%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 203 80% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 200 6% 18%;
+    --secondary-foreground: 0 0% 85%;
+
+    --muted: 200 4% 22%;
+    --muted-foreground: 0 0% 55%;
+
+    --accent: 203 80% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 200 4% 22%;
+    --input: 200 4% 22%;
+    --ring: 203 80% 50%;
+
+    --radius: 0.5rem;
+
+    /* Win11 specific tokens */
+    --win-mica: 200 6% 12%;
+    --win-surface: 200 6% 16%;
+    --win-surface-hover: 200 6% 20%;
+    --win-surface-active: 200 6% 24%;
+    --win-toolbar: 200 6% 13%;
+    --win-sidebar: 200 6% 11%;
+    --win-divider: 200 4% 20%;
+    --win-text-primary: 0 0% 95%;
+    --win-text-secondary: 0 0% 60%;
+    --win-accent: 203 80% 50%;
+    --win-accent-hover: 203 80% 55%;
+    --win-selected: 203 80% 50%;
+    --win-selected-bg: 203 80% 15%;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer utilities {
+  .win-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+  .win-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .win-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(var(--win-divider));
+    border-radius: 4px;
+  }
+  .win-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground));
+  }
+}
