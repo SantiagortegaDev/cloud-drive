@@ -1,9 +1,10 @@
 import { Cloud, FileText, Image, Video, Music, Download, Users, ChevronDown, HardDrive, Star } from "lucide-react";
+import { DbFolder } from "@/lib/supabase";
 
 interface SidebarProps {
-  folders: string[];
-  currentPath: string[];
-  onNavigate: (path: string[]) => void;
+  folders: DbFolder[];
+  currentFolderId: string | null;
+  onNavigate: (folder: DbFolder) => void;
 }
 
 const folderIcons: Record<string, any> = {
@@ -15,10 +16,7 @@ const folderIcons: Record<string, any> = {
   Shared: Users,
 };
 
-const Sidebar = ({ folders, currentPath, onNavigate }: SidebarProps) => {
-  const isActive = (folder: string) =>
-    currentPath.length >= 2 && currentPath[1] === folder;
-
+const Sidebar = ({ folders, currentFolderId, onNavigate }: SidebarProps) => {
   return (
     <div className="flex w-52 flex-col overflow-y-auto bg-win-sidebar py-2 win-scrollbar">
       {/* Quick access */}
@@ -48,12 +46,12 @@ const Sidebar = ({ folders, currentPath, onNavigate }: SidebarProps) => {
       </div>
 
       {folders.map((folder) => {
-        const Icon = folderIcons[folder] || FileText;
-        const active = isActive(folder);
+        const Icon = folderIcons[folder.name] || FileText;
+        const active = currentFolderId === folder.id;
         return (
           <button
-            key={folder}
-            onClick={() => onNavigate(["Cloud Drive", folder])}
+            key={folder.id}
+            onClick={() => onNavigate(folder)}
             className={`flex items-center gap-2.5 py-[5px] pl-9 pr-4 text-left text-xs transition-colors active:scale-[0.98] ${
               active
                 ? "bg-win-selected-bg text-win-accent font-medium"
@@ -61,7 +59,7 @@ const Sidebar = ({ folders, currentPath, onNavigate }: SidebarProps) => {
             }`}
           >
             <Icon className="h-3.5 w-3.5" />
-            {folder}
+            {folder.name}
           </button>
         );
       })}
@@ -72,12 +70,12 @@ const Sidebar = ({ folders, currentPath, onNavigate }: SidebarProps) => {
         <div className="rounded-md bg-win-surface p-3">
           <div className="mb-1.5 flex items-center justify-between text-[11px]">
             <span className="text-win-text-secondary">Storage</span>
-            <span className="text-win-text-primary">68.4 GB / 100 GB</span>
+            <span className="text-win-text-primary">Unlimited</span>
           </div>
           <div className="h-1.5 overflow-hidden rounded-full bg-win-divider">
             <div
               className="h-full rounded-full bg-win-accent"
-              style={{ width: "68.4%" }}
+              style={{ width: "0%" }}
             />
           </div>
         </div>

@@ -1,10 +1,13 @@
 export interface FileItem {
+  id: string;
   name: string;
   modified: string;
   type: string;
   size: string;
   icon: string;
   isFolder?: boolean;
+  url?: string;
+  folderId?: string | null;
 }
 
 export interface FolderContent {
