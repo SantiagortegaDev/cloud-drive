@@ -85,16 +85,17 @@ const UploadModal = ({ currentFolderId, onClose, onComplete }: UploadModalProps)
 
       setProgress(30);
 
-      const response = await fetch("https://catbox.moe/user/api.php", {
+      const response = await fetch("/api/upload-catbox", {
         method: "POST",
         body: formData,
       });
 
       setProgress(70);
 
-      const link = await response.text();
+      const result = await response.json();
 
-      if (link.startsWith("https://files.catbox.moe/")) {
+      if (result.url && result.url.startsWith("https://files.catbox.moe/")) {
+        const link = result.url;
         setProgress(85);
         
         // Save to Supabase
@@ -119,7 +120,7 @@ const UploadModal = ({ currentFolderId, onClose, onComplete }: UploadModalProps)
           onComplete();
         }, 1500);
       } else {
-        throw new Error(link || "Upload failed");
+        throw new Error(result.error || "Upload failed");
       }
     } catch (err) {
       setStatus("error");
